@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/estacoes/static/css/main.be5bb39a.css",
+    "main.js": "/estacoes/static/js/main.010192b2.js",
+    "static/js/453.4553f296.chunk.js": "/estacoes/static/js/453.4553f296.chunk.js",
+    "static/media/spring.jpg": "/estacoes/static/media/spring.27897e560b19d343df8d.jpg",
+    "static/media/autumn.jpg": "/estacoes/static/media/autumn.66be41f1d7f6c3d544ed.jpg",
+    "static/media/summer.jpg": "/estacoes/static/media/summer.a63e974dda0f9be21617.jpg",
+    "static/media/winter.jpg": "/estacoes/static/media/winter.7c7c1c846fc14a15af06.jpg",
+    "static/media/light.png": "/estacoes/static/media/light.b3e3e01bc45ea100c35f.png",
+    "static/media/dark.png": "/estacoes/static/media/dark.450dcb5a2eeb4d942de1.png",
+    "static/media/marker-icon.png": "/estacoes/static/media/marker-icon.4e79c111d1d9016e7c29.png",
+    "index.html": "/estacoes/index.html",
+    "main.be5bb39a.css.map": "/estacoes/static/css/main.be5bb39a.css.map",
+    "main.010192b2.js.map": "/estacoes/static/js/main.010192b2.js.map",
+    "453.4553f296.chunk.js.map": "/estacoes/static/js/453.4553f296.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.be5bb39a.css",
+    "static/js/main.010192b2.js"
+  ]
+}
