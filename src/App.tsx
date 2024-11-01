@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Mapa from './components/Mapa';
 import Menu from './components/Menu';
@@ -11,10 +11,18 @@ import ThemeDark from "./theme/ThemeDark";
 import { useTheme } from './store/themeStore';
 
 import './App.css';
+import Loader from './components/Loader';
 
 function App() {
   const { theme } = useTheme();
   const [modal, setModal] = useState<ModalType | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Verificar quando todos os elementos da página foram carregados
+    window.addEventListener('load', () => setIsLoaded(true));
+    return () => window.removeEventListener('load', () => setIsLoaded(true));
+  }, []);
 
   const handleModalStatus = useCallback((flag: boolean, type: ModalType) => {
     if (flag) {
@@ -26,10 +34,16 @@ function App() {
 
   return (
     <ThemeProvider theme={theme === 'dark' ? ThemeDark : Theme}>
-      <Modal onClose={handleModalStatus} type={modal} />
+      {!isLoaded && <Loader onLoadComplete={() => setIsLoaded(true)} />}
 
-      <Menu handleSearchModal={handleModalStatus} />
-      <Mapa />
+      {isLoaded && (
+        <>
+          <Modal onClose={handleModalStatus} type={modal} />
+
+          <Menu handleSearchModal={handleModalStatus} />
+          <Mapa />
+        </>
+      )}
     </ThemeProvider>
   );
 }
