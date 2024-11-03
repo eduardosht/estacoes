@@ -1,5 +1,5 @@
 // Mapa.tsx (componente principal)
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap, Marker } from 'react-leaflet';
 import COUNSTRIES_DATA from '../../data/countries.json'
 import COUNSTRIES_SEASON_DATA from '../../scripts/country_seasons.json';
@@ -60,14 +60,29 @@ const CountrySelectedComponent: React.FC<{ selectedCountry: CountryFeature | nul
     }
   }, [selectedCountry, map]);
 
+  useEffect(() => {
+    const final: any[] = [];
+    (COUNSTRIES_DATA as any).features.map((c: any) => {
+      const center = turf.centroid(c).geometry.coordinates;
+      final.push({
+        country: c.properties.ADMIN,
+        lat: center[1],
+        long: center[0],
+      })
+    })
+  }, []);
+
   return center ? <Marker position={center} icon={markerIcon} /> : null;
 };
 
-const Mapa: React.FC = () => {
+interface IMapa {
+  onSelectCountry: (country: any) => void;
+  country: any,
+}
+const Mapa: React.FC<IMapa> = ({ onSelectCountry, country }) => {
   const { theme } = useTheme();
-  const { selectedCountry } = useCountryStore();
+  const { selectedCountry, setSelectedCountry } = useCountryStore();
   const [countryData, setCountryData] = useState<CountryFeature[]>([]);
-  const [country, setCountry] = useState<any>(null);
 
   useEffect(() => {
     setCountryData((COUNSTRIES_DATA as any).features);
@@ -81,24 +96,23 @@ const Mapa: React.FC = () => {
     fillOpacity: 0.6,
   });
 
-  const onCountryClick = (countryName: string) => {
+  const onCountryClick = useCallback((countryName: string) => {
     const dataCordinates = (COUNSTRIES_DATA as any).features.find((country: any) => country.properties.ADMIN === countryName) || null;
     const dataSeasons = COUNSTRIES_SEASON_DATA.find((country) => country.country === countryName) || null;
 
     const factoryCurrentCountry = {
       ...dataSeasons,
-      ...dataCordinates,
-      lat: 53.56944447900004,
-      lng: 134.772579387000,
+      ...dataCordinates
     }
 
-    setCountry(factoryCurrentCountry)
-  };
+    setSelectedCountry(dataSeasons!.country)
+    onSelectCountry(factoryCurrentCountry)
+  }, [onSelectCountry, setSelectedCountry]);
 
   useEffect(() => {
     if (!selectedCountry) return
     onCountryClick(selectedCountry);
-  }, [selectedCountry]);
+  }, [onCountryClick, selectedCountry]);
 
   return (
     <>
@@ -131,16 +145,6 @@ const Mapa: React.FC = () => {
         {/* Hook para ajustar o zoom e adicionar um marcador quando um país é selecionado */}
         <CountrySelectedComponent selectedCountry={country} />
       </MapContainer>
-
-      {country && (
-        <CountryInfo
-          countryData={{
-            country: country?.country,
-            hemisphere: country?.hemisphere,
-            seasons: country?.seasons
-          }}
-        />
-      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { isWithinInterval, parse, getMonth, getDate } from 'date-fns';
+import { isWithinInterval, parse } from 'date-fns';
 import { Seasons } from '../models/SeasonModel';
 
 export const determinarEstacao = (mes: number, hemisferio: 'norte' | 'sul') => {

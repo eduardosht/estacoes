@@ -34,6 +34,7 @@ export const SeasonBox = styled.div`
   align-items: center;
   width: 22%;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const SeasonTitle = styled.h3`

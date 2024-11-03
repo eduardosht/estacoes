@@ -48,6 +48,12 @@ const ModalCountrySearch = ({ onClose }: IModalCountrySearch) => {
   return (
     <>
       <S.Title>Procure um país</S.Title>
+      <S.Text>
+        Escolha um país para explorar informações detalhadas sobre o clima ao longo do ano.
+        Ao selecionar um país, você poderá visualizar dados mensais de temperatura, precipitação, vento e outras condições climáticas.
+        Essa ferramenta oferece uma visão geral das médias anuais, ajudando a entender o padrão climático de diferentes regiões.
+        Lembre-se de que as condições podem variar de acordo com a localização e as mudanças climáticas globais.
+      </S.Text>
       <S.SearchInput
         type="text"
         value={search}

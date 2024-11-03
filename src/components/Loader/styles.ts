@@ -21,7 +21,7 @@ export const LoaderContainer = styled.div<{ fadeOut: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #06073c;
+  background-color: ${(props) => props.theme?.color.primary};
   color: #fff;
   font-size: 24px;
   z-index: 1000;

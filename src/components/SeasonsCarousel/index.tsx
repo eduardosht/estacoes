@@ -12,6 +12,7 @@ import { Season, Seasons } from '../../models/SeasonModel';
 import * as S from './styles';
 import { getCurrentSeason } from '../../utils/estacoes';
 import Bouncer from '../Bouncer';
+import { ModalType } from '../shared/enum/ModalType';
 
 // Função para formatar as datas de início e término
 const formatSeasonDates = (season: Season) => {
@@ -32,10 +33,11 @@ const formatSeasonDates = (season: Season) => {
 };
 
 interface ISeasonCarousel {
+  handleModalStatus: (flag: boolean, type: ModalType) => void;
   seasons: Seasons
 }
 
-const SeasonCarousel = ({ seasons }: ISeasonCarousel) => {
+const SeasonCarousel = ({ seasons, handleModalStatus }: ISeasonCarousel) => {
   const currentSeason = useMemo(() => getCurrentSeason(seasons), [seasons]);
 
   const settings = {
@@ -95,11 +97,15 @@ const SeasonCarousel = ({ seasons }: ISeasonCarousel) => {
     },
   ], [seasons]);
 
+  const handleSeasonBox = () => {
+    handleModalStatus(true, ModalType.WEATHER);
+  }
+
   return (
     <div className="carousel-container">
       <Slider {...settings}>
         {seasonData.map((season, index) => (
-          <S.SeasonBox key={index} className="season-slide">
+          <S.SeasonBox key={index} className="season-slide" onClick={handleSeasonBox}>
             <S.FeaturedImage>
               {currentSeason === season.key && <Bouncer icon={<FaRegHandPointLeft />} />}
               <img src={season.image} alt={season.title} title={season.title} />

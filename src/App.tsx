@@ -12,11 +12,13 @@ import { useTheme } from './store/themeStore';
 
 import './App.css';
 import Loader from './components/Loader';
+import CountryInfo from './components/CountryInfo';
 
 function App() {
   const { theme } = useTheme();
   const [modal, setModal] = useState<ModalType | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [country, setCountry] = useState<any>(null);
 
   useEffect(() => {
     // Verificar quando todos os elementos da página foram carregados
@@ -32,6 +34,10 @@ function App() {
     setModal(null);
   }, []);
 
+  const handleSelectCountry = useCallback((data: any) => {
+    setCountry(data);
+  }, []);
+
   return (
     <ThemeProvider theme={theme === 'dark' ? ThemeDark : Theme}>
       {!isLoaded && <Loader onLoadComplete={() => setIsLoaded(true)} />}
@@ -41,8 +47,19 @@ function App() {
           <Modal onClose={handleModalStatus} type={modal} />
 
           <Menu handleSearchModal={handleModalStatus} />
-          <Mapa />
+          <Mapa onSelectCountry={handleSelectCountry} country={country} />
         </>
+      )}
+
+      {country && (
+        <CountryInfo
+          handleModalStatus={handleModalStatus}
+          countryData={{
+            country: country?.country,
+            hemisphere: country?.hemisphere,
+            seasons: country?.seasons
+          }}
+        />
       )}
     </ThemeProvider>
   );

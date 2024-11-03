@@ -6,9 +6,11 @@ import SeasonCarousel from '../SeasonsCarousel';
 import { Seasons } from '../../models/SeasonModel';
 
 import * as S from './styles';
+import { ModalType } from '../shared/enum/ModalType';
 
 
 type CountryInfoProps = {
+  handleModalStatus: (flag: boolean, type: ModalType) => void;
   countryData: {
     country: string;
     hemisphere: string;
@@ -16,7 +18,7 @@ type CountryInfoProps = {
   };
 };
 
-const CountryInfo: React.FC<CountryInfoProps> = ({ countryData }) => {
+const CountryInfo: React.FC<CountryInfoProps> = ({ countryData, handleModalStatus }) => {
   const [showContent, setShowContent] = useState(false);
 
   const { country, hemisphere, seasons } = countryData;
@@ -40,7 +42,7 @@ const CountryInfo: React.FC<CountryInfoProps> = ({ countryData }) => {
       <S.CountryTitle>{country}</S.CountryTitle>
       <S.HemisphereInfo>Hemisfério: {hemisphere}</S.HemisphereInfo>
 
-      <SeasonCarousel seasons={seasons} />
+      <SeasonCarousel seasons={seasons} handleModalStatus={handleModalStatus} />
     </S.CountryInfoContainer>
   );
 };

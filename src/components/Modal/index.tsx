@@ -5,9 +5,11 @@ import { ModalType } from '../shared/enum/ModalType';
 import ModalCountrySearch from './CountrySearch';
 import ModalAbout from './About';
 import ModalConfigApp from './ConfigApp';
+import ModalWeather from './Weather';
+
+import { useTheme } from '../../store/themeStore';
 
 import * as S from './styles';
-import { useTheme } from '../../store/themeStore';
 
 interface IModalCountrySearch {
   onClose: (flag: boolean, type: ModalType) => void
@@ -16,6 +18,7 @@ interface IModalCountrySearch {
 
 const Modal = ({ onClose, type }: IModalCountrySearch) => {
   const { theme } = useTheme();
+
   const handleKeyDown = (event: React.KeyboardEvent<any>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault(); // Prevê o scroll quando `Space` é pressionado
@@ -36,8 +39,12 @@ const Modal = ({ onClose, type }: IModalCountrySearch) => {
       case ModalType.COUNTRY_SEARCH:
         return <ModalCountrySearch onClose={onClose} />
 
+      case ModalType.WEATHER:
+        return <ModalWeather />
+
       case ModalType.CONFIG:
         return <ModalConfigApp />
+
       default:
         return null
     }

@@ -15,6 +15,11 @@ export const SearchInput = styled.input`
   color: ${(props) => props.theme?.color.secundary};
 `;
 
+export const Text = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
+`;
+
 export const SuggestionsList = styled.ul`
   list-style-type: none;
   margin: 0;
