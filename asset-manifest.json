@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/estacoes/static/css/main.dd1fc462.css",
-    "main.js": "/estacoes/static/js/main.d67fbd5a.js",
+    "main.css": "/estacoes/static/css/main.71c48d3c.css",
+    "main.js": "/estacoes/static/js/main.5d02c862.js",
     "static/js/453.4553f296.chunk.js": "/estacoes/static/js/453.4553f296.chunk.js",
     "static/media/spring.jpg": "/estacoes/static/media/spring.27897e560b19d343df8d.jpg",
     "static/media/autumn.jpg": "/estacoes/static/media/autumn.66be41f1d7f6c3d544ed.jpg",
@@ -15,12 +15,12 @@
     "static/media/slick.ttf": "/estacoes/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/estacoes/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/estacoes/index.html",
-    "main.dd1fc462.css.map": "/estacoes/static/css/main.dd1fc462.css.map",
-    "main.d67fbd5a.js.map": "/estacoes/static/js/main.d67fbd5a.js.map",
+    "main.71c48d3c.css.map": "/estacoes/static/css/main.71c48d3c.css.map",
+    "main.5d02c862.js.map": "/estacoes/static/js/main.5d02c862.js.map",
     "453.4553f296.chunk.js.map": "/estacoes/static/js/453.4553f296.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dd1fc462.css",
-    "static/js/main.d67fbd5a.js"
+    "static/css/main.71c48d3c.css",
+    "static/js/main.5d02c862.js"
   ]
 }
