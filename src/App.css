@@ -1,12 +1,14 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-[role="button"]:focus {
+[role="button"]:focus,
+select:focus-visible {
   outline: 2px solid #f4a672;
   /* Borda azul, indicando foco */
   outline-offset: 2px;
   /* Espaçamento entre a borda e o conteúdo */
 }
+
 
 button[disabled] {
   cursor: no-drop;

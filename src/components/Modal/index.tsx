@@ -1,4 +1,4 @@
-import { useCallback, memo } from 'react';
+import { useCallback, memo, useEffect } from 'react';
 
 import { ModalType } from '../shared/enum/ModalType';
 
@@ -18,6 +18,42 @@ interface IModalCountrySearch {
 
 const Modal = ({ onClose, type }: IModalCountrySearch) => {
   const { theme } = useTheme();
+
+  useEffect(() => {
+    // Função para desabilitar botões fora do modal
+    const disableOutsideButtons = (disable: boolean) => {
+      const buttonsOutsideModal = document.querySelectorAll(
+        '[role="button"]:not(#modal-wrapper [role="button"])'
+      ) as NodeListOf<HTMLElement>;
+
+      buttonsOutsideModal.forEach(button => {
+        if (disable) {
+          button.setAttribute("aria-hidden", "true");
+          button.tabIndex = -1;
+        } else {
+          button.removeAttribute("aria-hidden");
+          button.tabIndex = 0;
+        }
+      });
+    };
+
+    if (type) {
+      // Desabilita botões fora do modal ao abrir o modal
+      disableOutsideButtons(true);
+
+      // Define o foco no primeiro elemento focável dentro do modal
+      const firstFocusable = document.querySelector("#modal-wrapper")?.querySelector("input, button, [role='button']") as HTMLElement;
+      if (firstFocusable) firstFocusable.focus();
+    } else {
+      // Reativa botões fora do modal ao fechar o modal
+      disableOutsideButtons(false);
+    }
+
+    return () => {
+      // Restaura os botões quando o modal é desmontado
+      disableOutsideButtons(false);
+    };
+  }, [type]);
 
   const handleKeyDown = (event: React.KeyboardEvent<any>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -54,7 +90,7 @@ const Modal = ({ onClose, type }: IModalCountrySearch) => {
   if (!type) return null;
 
   return (
-    <S.ModalOverlay onClick={closeModal}>
+    <S.ModalOverlay id="modal-wrapper" onClick={closeModal}>
       <S.ModalContent onClick={(e) => e.stopPropagation()} isDark={theme === 'dark'}>
         <S.CloseIcon onClick={closeModal} role="button" tabIndex={0} onKeyDown={handleKeyDown} />
         {renderModal(type)}

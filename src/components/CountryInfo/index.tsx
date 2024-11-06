@@ -41,7 +41,6 @@ const CountryInfo: React.FC<CountryInfoProps> = ({ countryData, handleModalStatu
       </S.UpIcon>
       <S.CountryTitle>{country}</S.CountryTitle>
       <S.HemisphereInfo>Hemisfério: {hemisphere}</S.HemisphereInfo>
-
       <SeasonCarousel seasons={seasons} handleModalStatus={handleModalStatus} />
     </S.CountryInfoContainer>
   );

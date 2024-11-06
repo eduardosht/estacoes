@@ -25,6 +25,7 @@ export const HemisphereInfo = styled.p`
   color: ${(props) => props.theme?.color.secundary};
   text-align: center;
   margin-top: -10px;
+  
 `;
 
 export const UpIcon = styled.div`

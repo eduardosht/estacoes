@@ -19,7 +19,7 @@ const IconContainer = styled.div`
   animation: ${bounceAnimation} 2s ease-in-out infinite;
   font-size: 1rem;
   left: 92px;
-  top: -1px;
+  top: 12px;
 `;
 
 const Wrapper = styled.div`
@@ -35,7 +35,6 @@ const Bouncer = ({ icon }: any) => {
     <IconContainer>
       <Wrapper>
         {icon}
-        <p>Hoje</p>
       </Wrapper>
     </IconContainer>
   );

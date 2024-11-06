@@ -2,13 +2,25 @@ import styled from 'styled-components';
 
 export const Paragraph = styled.p`
   color: ${(props) => props.theme?.color.secundary};
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: normal;
+  gap: 10px;
+  text-align: justify;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 40px;
 `
 export const SeasonDates = styled.div`
   font-size: 14px;
   color: #666;
+  margin-top: 10px;
 
   p {
-    margin: 0;
+    margin: 0 0 5px 0;
   }
 `;
 
@@ -18,9 +30,16 @@ export const FeaturedImage = styled.div`
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto;
+  min-height: 200px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  transition: 0.3s all;
+  
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
+  }
 
   img {
     display: block;

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Slider from 'react-slick';
-import { FaArrowLeft, FaArrowRight, FaRegHandPointLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaRegHandPointLeft, FaArrowRight } from 'react-icons/fa';
 
 import SummerImage from '../../asset/summer.jpg'
 import WinterImage from '../../asset/winter.jpg'
@@ -26,8 +26,15 @@ const formatSeasonDates = (season: Season) => {
 
   return (
     <div>
-      <S.Paragraph><strong>Início: </strong> {String(season.start.day).padStart(2, '0')} / {startMonthName}</S.Paragraph>
-      <S.Paragraph><strong>Término: </strong> {String(season.end.day).padStart(2, '0')} / {endMonthName}</S.Paragraph>
+      <S.Paragraph>
+        <FaArrowRight style={{ color: '#007b1c', fontSize: 20 }} />
+        {String(season.start.day).padStart(2, '0')} / {startMonthName}
+      </S.Paragraph>
+
+      <S.Paragraph>
+        <FaArrowLeft style={{ color: '#910000', fontSize: 20 }} />
+        {String(season.end.day).padStart(2, '0')} / {endMonthName}
+      </S.Paragraph>
     </div>
   );
 };
@@ -101,17 +108,24 @@ const SeasonCarousel = ({ seasons, handleModalStatus }: ISeasonCarousel) => {
     handleModalStatus(true, ModalType.WEATHER);
   }
 
+  const handleKeyDown = () => (event: React.KeyboardEvent<any>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault(); // Prevê o scroll quando `Space` é pressionado
+      handleModalStatus(true, ModalType.WEATHER);
+    }
+  };
+
   return (
     <div className="carousel-container">
       <Slider {...settings}>
         {seasonData.map((season, index) => (
           <S.SeasonBox key={index} className="season-slide" onClick={handleSeasonBox}>
-            <S.FeaturedImage>
+            <S.FeaturedImage role="button" tabIndex={0} onKeyDown={handleKeyDown()}>
               {currentSeason === season.key && <Bouncer icon={<FaRegHandPointLeft />} />}
               <img src={season.image} alt={season.title} title={season.title} />
               <S.SeasonTitle>{season.title}</S.SeasonTitle>
+              <S.SeasonDates>{formatSeasonDates(season.date)}</S.SeasonDates>
             </S.FeaturedImage>
-            <S.SeasonDates>{formatSeasonDates(season.date)}</S.SeasonDates>
           </S.SeasonBox>
         ))}
       </Slider>
